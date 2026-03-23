@@ -1,33 +1,39 @@
 package bloom.plant;
 
+import bloom.Habit;
 import bloom.observer.HabitObserver;
 
 import java.time.Clock;
 
 // Our abstract template class
 public abstract class Plant implements HabitObserver {
+
+    private String name;
+    private PlantState currentStage;
+    private final Clock clock;
+
     public Plant(String name) {
         this.name = name;
         this.currentStage = PlantState.SEEDLING;
         clock = Clock.systemUTC();
     }
 
-    private String name;
-    private PlantState currentStage;
-    private final Clock clock;
 
     // our template function 1
     public final void grow() {
         switch (currentStage) {
-            case PlantState.SEEDLING -> {
+            case SEEDLING -> {
                 System.out.println("Growing");
                 currentStage = PlantState.GROWING;
+                absorbWater();
+
             }
-            case PlantState.GROWING -> {
+            case GROWING -> {
                 System.out.println("Matured!");
                 currentStage = PlantState.MATURE;
+                celebrateGrowth();
             }
-            case PlantState.MATURE -> {
+            case MATURE -> {
                 System.out.println("Continue to maintain your mature plant");
             }
             case DEAD ->  {
@@ -39,18 +45,35 @@ public abstract class Plant implements HabitObserver {
     // our template function 2
     public final void wither() {
         switch (currentStage) {
-            case PlantState.SEEDLING -> {
+            case SEEDLING -> {
                 currentStage = PlantState.DEAD;
+                loseNourishment();
             }
-            case PlantState.GROWING -> {
-//                currentStage = PlantState.MATURE;
+            case GROWING -> {
+                currentStage = PlantState.SEEDLING;
+                loseNourishment();
             }
-            case PlantState.MATURE -> {
+            case MATURE -> {
+                currentStage = PlantState.GROWING;
+                loseNourishment();
 
             }
-            case PlantState.DEAD -> {}
+            case DEAD -> {}
         }
 
+    }
+    @Override
+    public void onHabitCompleted(Habit habit) {
+        grow();
+    }
+
+    @Override
+    public void onHabitNeglected(Habit habit) {
+        wither();
+    }
+
+    public PlantState getCurrentStage() {
+        return currentStage;
     }
 
     abstract protected void absorbWater();

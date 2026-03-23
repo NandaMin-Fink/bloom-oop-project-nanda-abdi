@@ -21,16 +21,6 @@ public class RosePlant extends Plant {
     @Override
     protected void celebrateGrowth() {
         System.out.println("Rose plant reaches its final stage!");
-
     }
 
-    @Override
-    public void onHabitCompleted(Habit habit) {
-        absorbWater();
-    }
-
-    @Override
-    public void onHabitNeglected(Habit habit) {
-        loseNourishment();
-    }
 }
