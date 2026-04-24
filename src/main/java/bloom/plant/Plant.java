@@ -1,15 +1,22 @@
 package bloom.plant;
 
 import bloom.observer.HabitObserver;
+import org.slf4j.Logger;
 
 import java.time.Clock;
 
-// Our abstract template class
+// Template
 public abstract class Plant implements HabitObserver {
+    static Logger logger = org.slf4j.LoggerFactory.getLogger(Plant.class);
+
     public Plant(String name) {
+        this(name, Clock.systemUTC());
+    }
+
+    public Plant(String name, Clock clock) {
         this.name = name;
         this.currentStage = PlantState.SEEDLING;
-        clock = Clock.systemUTC();
+        this.clock = clock;
     }
 
     private String name;
@@ -20,18 +27,18 @@ public abstract class Plant implements HabitObserver {
     public final void grow() {
         switch (currentStage) {
             case PlantState.SEEDLING -> {
-                System.out.println("Growing");
+                logger.info("Growing");
                 currentStage = PlantState.GROWING;
             }
             case PlantState.GROWING -> {
-                System.out.println("Matured!");
+                logger.info("Matured!");
                 currentStage = PlantState.MATURE;
             }
             case PlantState.MATURE -> {
-                System.out.println("Continue to maintain your mature plant");
+                logger.info("Continue to maintain your matured plant");
             }
             case DEAD ->  {
-                System.out.println("Your habit already died think about planting a new one");
+                logger.info("Your habit already died");
             }
         }
     }
@@ -40,13 +47,16 @@ public abstract class Plant implements HabitObserver {
     public final void wither() {
         switch (currentStage) {
             case PlantState.SEEDLING -> {
+                logger.info("Withered away");
                 currentStage = PlantState.DEAD;
             }
             case PlantState.GROWING -> {
-//                currentStage = PlantState.MATURE;
+                logger.info("Regressing");
+                currentStage = PlantState.SEEDLING;
             }
             case PlantState.MATURE -> {
-
+                logger.info("Plant lost some growth");
+                currentStage = PlantState.GROWING;
             }
             case PlantState.DEAD -> {}
         }

@@ -5,32 +5,30 @@ import org.slf4j.Logger;
 
 import java.time.Clock;
 
-public class RosePlant extends Plant {
-    static Logger logger = org.slf4j.LoggerFactory.getLogger(RosePlant.class);
+public class MangoTree extends Plant {
+    static Logger logger = org.slf4j.LoggerFactory.getLogger(MangoTree.class);
 
-    public RosePlant(String name) {
+    public MangoTree(String name) {
         super(name);
     }
 
-    public RosePlant(String name, Clock clock) {
+    public MangoTree(String name, Clock clock) {
         super(name, clock);
     }
 
     @Override
     protected void absorbWater() {
-        logger.info("The rose plant absorbs water");
+        logger.info("The mango tree absorbs water");
     }
 
     @Override
     protected void loseNourishment() {
-        logger.info("The rose plant loses some nourishment");
-
+        logger.info("The mango tree loses nourishment");
     }
 
     @Override
     protected void celebrateGrowth() {
-        logger.info("Rose plant achieved final stage!");
-
+        logger.info("Mango tree reaches its final stage!");
     }
 
     @Override

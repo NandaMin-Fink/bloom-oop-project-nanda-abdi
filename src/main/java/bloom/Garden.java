@@ -1,10 +1,14 @@
 package bloom;
+
+import org.slf4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class Garden {
+    static Logger logger = org.slf4j.LoggerFactory.getLogger(Garden.class);
 
     private final String ownerName;
     private final List<Habit> habits = new ArrayList<>();
@@ -15,7 +19,7 @@ public class Garden {
 
     public void addHabit(Habit habit) {
         habits.add(habit);
-        System.out.println("Added habit " + habit.getName() + " to " + ownerName + " garden.");
+        logger.info("Added habit {} to {} garden.", habit.getName(), ownerName);
     }
 
     public Optional<Habit> findHabit(String habitName) {
@@ -24,7 +28,7 @@ public class Garden {
                 .findFirst();
     }
 
-    // Good to call on startup or some refresh that we end up determining
+    // We can call on startup or some refresh
     public void checkAllHabits() {
         habits.forEach(Habit::checkAndApplyNeglect);
     }
