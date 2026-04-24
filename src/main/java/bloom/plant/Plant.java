@@ -1,5 +1,6 @@
 package bloom.plant;
 
+import bloom.Habit;
 import bloom.observer.HabitObserver;
 import org.slf4j.Logger;
 
@@ -8,6 +9,10 @@ import java.time.Clock;
 // Template
 public abstract class Plant implements HabitObserver {
     static Logger logger = org.slf4j.LoggerFactory.getLogger(Plant.class);
+
+    private String name;
+    private PlantState currentStage;
+    private final Clock clock;
 
     public Plant(String name) {
         this(name, Clock.systemUTC());
@@ -19,22 +24,22 @@ public abstract class Plant implements HabitObserver {
         this.clock = clock;
     }
 
-    private String name;
-    private PlantState currentStage;
-    private final Clock clock;
 
     // our template function 1
     public final void grow() {
         switch (currentStage) {
-            case PlantState.SEEDLING -> {
+            case SEEDLING -> {
                 logger.info("Growing");
                 currentStage = PlantState.GROWING;
+                absorbWater();
+
             }
-            case PlantState.GROWING -> {
+            case GROWING -> {
                 logger.info("Matured!");
                 currentStage = PlantState.MATURE;
+                celebrateGrowth();
             }
-            case PlantState.MATURE -> {
+            case MATURE -> {
                 logger.info("Continue to maintain your matured plant");
             }
             case DEAD ->  {
@@ -46,21 +51,38 @@ public abstract class Plant implements HabitObserver {
     // our template function 2
     public final void wither() {
         switch (currentStage) {
-            case PlantState.SEEDLING -> {
+            case SEEDLING -> {
                 logger.info("Withered away");
                 currentStage = PlantState.DEAD;
+                loseNourishment();
             }
-            case PlantState.GROWING -> {
+            case GROWING -> {
                 logger.info("Regressing");
                 currentStage = PlantState.SEEDLING;
+                loseNourishment();
             }
-            case PlantState.MATURE -> {
+            case MATURE -> {
                 logger.info("Plant lost some growth");
                 currentStage = PlantState.GROWING;
+                loseNourishment();
+
             }
-            case PlantState.DEAD -> {}
+            case DEAD -> {}
         }
 
+    }
+    @Override
+    public void onHabitCompleted(Habit habit) {
+        grow();
+    }
+
+    @Override
+    public void onHabitNeglected(Habit habit) {
+        wither();
+    }
+
+    public PlantState getCurrentStage() {
+        return currentStage;
     }
 
     abstract protected void absorbWater();

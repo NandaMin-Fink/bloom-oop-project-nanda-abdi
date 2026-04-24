@@ -1,6 +1,5 @@
 package bloom.plant;
 
-import bloom.Habit;
 import org.slf4j.Logger;
 
 import java.time.Clock;
@@ -29,15 +28,5 @@ public class AppleTree extends Plant {
     @Override
     protected void celebrateGrowth() {
         logger.info("Apple tree is fully grown!");
-    }
-
-    @Override
-    public void onHabitCompleted(Habit habit) {
-        absorbWater();
-    }
-
-    @Override
-    public void onHabitNeglected(Habit habit) {
-        loseNourishment();
     }
 }

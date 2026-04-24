@@ -1,6 +1,5 @@
 package bloom.plant;
 
-import bloom.Habit;
 import org.slf4j.Logger;
 
 import java.time.Clock;
@@ -29,15 +28,5 @@ public class MangoTree extends Plant {
     @Override
     protected void celebrateGrowth() {
         logger.info("Mango tree reaches its final stage!");
-    }
-
-    @Override
-    public void onHabitCompleted(Habit habit) {
-        absorbWater();
-    }
-
-    @Override
-    public void onHabitNeglected(Habit habit) {
-        loseNourishment();
     }
 }
