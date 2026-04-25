@@ -22,6 +22,11 @@ public class Garden {
         logger.info("Added habit {} to {} garden.", habit.getName(), ownerName);
     }
 
+    public void removeHabit(Habit habit) {
+        habits.remove(habit);
+        logger.info("Removed habit {} from {} garden.", habit.getName(), ownerName);
+    }
+
     public Optional<Habit> findHabit(String habitName) {
         return habits.stream()
                 .filter(h -> h.getName().equalsIgnoreCase(habitName))

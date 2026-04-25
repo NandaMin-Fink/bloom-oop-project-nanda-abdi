@@ -46,8 +46,11 @@ public class Habit {
         }
     }
 
+
+
     public boolean isNeglected() {
         if (lastCompleted == null) return false;
+
         return Instant.now(clock).isAfter(lastCompleted.plus(refreshPeriod));
     }
 
@@ -59,8 +62,12 @@ public class Habit {
     private void notifyNeglected() {
         for (HabitObserver o : observers) {
             o.onHabitNeglected(this);
+
         }
     }
 
     public String getName() { return name; }
+
+
+    public Instant getLastCompleted() { return lastCompleted; }
 }

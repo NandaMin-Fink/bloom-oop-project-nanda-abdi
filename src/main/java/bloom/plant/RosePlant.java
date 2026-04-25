@@ -28,7 +28,7 @@ public class RosePlant extends Plant {
 
     @Override
     protected void celebrateGrowth() {
-        logger.info("Rose plant achieved final stage!");
+        logger.info("Rose plant achieved final stage; a beautiful rose");
 
     }
 

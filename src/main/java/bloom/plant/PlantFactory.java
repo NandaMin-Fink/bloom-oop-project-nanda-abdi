@@ -6,16 +6,29 @@ public class PlantFactory {
 
     private PlantFactory() { }
 
-    public static Plant createPlant(String type, String name) {
-        return createPlant(type, name, Clock.systemUTC());
+    public static Plant createRosePlant(String name) {
+        return createRosePlant(name, Clock.systemUTC());
     }
 
-    public static Plant createPlant(String type, String name, Clock clock) {
-        return switch (type.trim().toLowerCase()) {
-            case "rose"  -> new RosePlant(name, clock);
-            case "apple" -> new AppleTree(name, clock);
-            case "mango" -> new MangoTree(name, clock);
-            default -> throw new IllegalArgumentException("Unknown plant type");
-        };
+    public static Plant createRosePlant(String name, Clock clock) {
+        return new RosePlant(name, clock);
+    }
+
+
+    public static Plant createAppleTree(String name) {
+        return createAppleTree(name, Clock.systemUTC());
+    }
+
+    public static Plant createAppleTree(String name, Clock clock) {
+        return new AppleTree(name, clock);
+    }
+
+    public static Plant createMangoTree(String name) {
+        return createMangoTree(name, Clock.systemUTC());
+    }
+
+
+    public static Plant createMangoTree(String name, Clock clock) {
+        return new MangoTree(name, clock);
     }
 }

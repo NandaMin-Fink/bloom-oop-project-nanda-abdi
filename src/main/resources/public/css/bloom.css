@@ -1,0 +1,177 @@
+:root {
+    --bg: #f4f7f3;
+    --fg: #2d3a2f;
+    --fg-muted: #647166;
+    --accent: #4a8c5a;
+    --accent-dark: #356b43;
+    --danger: #c05a5a;
+    --card-bg: #ffffff;
+    --card-border: #e1e8e2;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.app-header {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    padding: 28px 0;
+    box-shadow: var(--shadow);
+}
+
+.app-header .title {
+    font-size: 2.2rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.app-header .tagline {
+    margin: 4px 0 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.stats-header {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 24px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    min-width: 110px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.empty-state {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.empty-state-inner {
+    text-align: center;
+    max-width: 400px;
+}
+
+.empty-state-icon {
+    font-size: 72px;
+    margin-bottom: 16px;
+}
+
+.empty-state h2 {
+    color: var(--fg);
+    margin: 16px 0 8px;
+    font-weight: 600;
+}
+
+.empty-state p {
+    color: var(--fg-muted);
+    margin-bottom: 28px;
+}
+
+.toast-root {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1050;
+}
+
+/* Modal */
+.modal-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.modal-backdrop-custom {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: auto;
+}
+
+.modal-card {
+    position: relative;
+    background: var(--card-bg);
+    color: var(--fg);
+    border-radius: 12px;
+    padding: 28px;
+    min-width: 380px;
+    max-width: 90vw;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px) scale(0.98);
+    opacity: 0;
+    transition: transform 0.2s, opacity 0.2s;
+    pointer-events: auto;
+}
+
+.modal-wrap.open .modal-backdrop-custom { opacity: 1; }
+.modal-wrap.open .modal-card { transform: translateY(0) scale(1); opacity: 1; }
+
+.modal-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--fg);
+    font-weight: 600;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.modal-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--fg);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

@@ -1,0 +1,138 @@
+.garden-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.habit-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s, background 0.2s;
+}
+
+.habit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.habit-card.neglected {
+    border-color: var(--danger);
+}
+
+.habit-card.dead {
+    opacity: 0.6;
+}
+
+.habit-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.habit-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--fg);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.habit-card-plant-name {
+    color: var(--fg-muted);
+    font-size: 0.8rem;
+    margin-top: 3px;
+}
+
+.habit-card-delete {
+    background: transparent;
+    border: none;
+    color: var(--fg-muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 6px;
+    opacity: 0;
+    transition: opacity 0.15s, color 0.15s;
+}
+
+.habit-card:hover .habit-card-delete { opacity: 0.6; }
+.habit-card-delete:hover { opacity: 1; color: var(--danger); }
+
+.plant-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    font-size: 68px;
+    margin: 10px 0 14px;
+    background: rgba(74, 140, 90, 0.08);
+    border-radius: 10px;
+}
+
+.habit-card-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.85rem;
+    color: var(--fg-muted);
+}
+
+.stage-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.stage-badge.seedling { background: #fef3cd; color: #8a6d1f; }
+.stage-badge.growing  { background: #d4edda; color: #356b43; }
+.stage-badge.mature   { background: #c3e5c8; color: #1e5329; }
+.stage-badge.dead     { background: #f5d5d5; color: #8a3030; }
+
+.streak {
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.streak .small {
+    color: var(--fg-muted);
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.last-watered {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+.habit-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.habit-card-actions .btn {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .garden-grid { grid-template-columns: 1fr; }
+    .app-header .title { font-size: 1.6rem; }
+    .app-header .tagline { font-size: 0.85rem; }
+}

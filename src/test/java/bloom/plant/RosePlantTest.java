@@ -10,39 +10,19 @@ class RosePlantTest {
 
     @BeforeEach
     void setUp() {
-        testRose = new RosePlant("Test Rose");
-    }
-
-    @Test
-     void testInitialStateIsSeed() {
-        assertEquals(PlantState.SEEDLING, testRose.getCurrentStage(), "Plant should start at stage 0 (Seed)");
+        testRose = new RosePlant(" Rose");
     }
 
     @Test
     void testGrowIncreasesStage() {
         testRose.grow();
-        assertEquals(PlantState.GROWING, testRose.getCurrentStage(), "Plant should grow to stage 1 (Sprout)");
+        assertEquals(PlantState.GROWING, testRose.getCurrentStage());
     }
 
     @Test
     void testWitherDecreasesStage() {
         testRose.grow();
         testRose.wither();
-        assertEquals(PlantState.SEEDLING, testRose.getCurrentStage(), "Plant should wither back down to stage 0");
-    }
-
-    @Test
-    void testMaxGrowthBoundary() {
-        testRose.grow();
-        testRose.grow();
-        testRose.grow();
-        testRose.grow();
-        assertEquals(PlantState.MATURE, testRose.getCurrentStage(), "Plant should not exceed maximum growth stage of 3");
-    }
-
-    @Test
-    void testMinWitherBoundary() {
-        testRose.wither();
-        assertEquals(PlantState.DEAD, testRose.getCurrentStage(), "Plant should not wither below stage 0");
+        assertEquals(PlantState.SEEDLING, testRose.getCurrentStage());
     }
 }

@@ -9,19 +9,18 @@ import java.time.Duration;
 
 
 void main() {
-    Garden garden = new Garden("Alex");
+    Garden garden = new Garden("Jack's Garden");
 
-    Plant rose  = PlantFactory.createPlant("rose",  "Morning Rose");
-    Plant mango = PlantFactory.createPlant("mango", "Mango Dream");
+    Plant rose  = PlantFactory.createRosePlant("Rose");
+    Plant mango = PlantFactory.createMangoTree("Mango Tree");
 
-    Habit reading  = new Habit("Read 20 minutes",     Duration.ofDays(1), Clock.systemDefaultZone());
-    Habit exercise = new Habit("Exercise 30 minutes", Duration.ofDays(1), Clock.systemDefaultZone());
+    Habit reading  = new Habit("Reading",     Duration.ofDays(1), Clock.systemDefaultZone());
+    Habit exercise = new Habit("Wennt for a walk", Duration.ofDays(1), Clock.systemDefaultZone());
 
     //plant observes its habit
     reading.addObserver(rose);
     exercise.addObserver(mango);
 
-    // Add streak track
     StreakTracker readingStreak = new StreakTracker();
 //    ConsoleLogger readingLog   = new ConsoleLogger();
     reading.addObserver(readingStreak);
