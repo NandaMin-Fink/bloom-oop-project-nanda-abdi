@@ -22,7 +22,7 @@ public class GardenJsonAdaptor {
             h.plantName = b.plantName();
 
 
-            h.stage = b.plant().getCurrentStage();
+            h.stage = b.plant().getCurrentStage().getStageName();
             h.streak = b.streak().getCurrentStreak();
             h.longestStreak = b.streak().getLongestStreak();
             h.neglected = b.habit().isNeglected();
@@ -39,7 +39,7 @@ public class GardenJsonAdaptor {
         public String plantType;
         public String plantName;
 
-        public PlantState stage;
+        public String stage;
         public int streak;
 
         public int longestStreak;

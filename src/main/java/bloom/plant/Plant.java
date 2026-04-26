@@ -14,63 +14,38 @@ public abstract class Plant implements HabitObserver {
     private PlantState currentStage;
     private final Clock clock;
 
+    private PlantState seedlingState;
+    private PlantState growingState;
+    private PlantState matureState;
+    private PlantState deadState;
+
     public Plant(String name) {
         this(name, Clock.systemUTC());
     }
 
     public Plant(String name, Clock clock) {
         this.name = name;
-        this.currentStage = PlantState.SEEDLING;
         this.clock = clock;
     }
 
 
-    // our template function 1
-    public final void grow() {
-        switch (currentStage) {
-            case SEEDLING -> {
-                logger.info("Growing");
-                currentStage = PlantState.GROWING;
-                absorbWater();
-
-            }
-            case GROWING -> {
-                logger.info("Matured!");
-                currentStage = PlantState.MATURE;
-                celebrateGrowth();
-            }
-            case MATURE -> {
-                logger.info("Continue to maintain your matured plant");
-            }
-            case DEAD ->  {
-                logger.info("Your habit already died");
-            }
-        }
+    public void setStates(PlantState seedling, PlantState growing, PlantState mature, PlantState dead) {
+        this.seedlingState = seedling;
+        this.growingState = growing;
+        this.matureState = mature;
+        this.deadState = dead;
+        this.currentStage = this.seedlingState; // Set initial state
     }
 
-    // our template function 2
-    public final void wither() {
-        switch (currentStage) {
-            case SEEDLING -> {
-                logger.info("Withered away");
-                currentStage = PlantState.DEAD;
-                loseNourishment();
-            }
-            case GROWING -> {
-                logger.info("Regressing");
-                currentStage = PlantState.SEEDLING;
-                loseNourishment();
-            }
-            case MATURE -> {
-                logger.info("Plant lost some growth");
-                currentStage = PlantState.GROWING;
-                loseNourishment();
+    void setStage(PlantState newStage) { this.currentStage = newStage; }
+    public PlantState getGrowingState() { return growingState; }
+    public PlantState getDeadState() { return deadState; }
+    public PlantState getMatureState() { return matureState; }
+    public PlantState getSeedlingState() { return seedlingState; }
 
-            }
-            case DEAD -> {}
-        }
+    public final void grow() { currentStage.handleGrow(this); }
+    public final void wither() { currentStage.handleWither(this); }
 
-    }
     @Override
     public void onHabitCompleted(Habit habit) {
         grow();

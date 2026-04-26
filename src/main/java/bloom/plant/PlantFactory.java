@@ -5,13 +5,24 @@ import java.time.Clock;
 public class PlantFactory {
 
     private PlantFactory() { }
+    private static void injectStates(Plant plant) {
+        plant.setStates(
+                new SeedlingState(),
+                new GrowingState(),
+                new MatureState(),
+                new DeadState()
+        );
+    }
 
     public static Plant createRosePlant(String name) {
         return createRosePlant(name, Clock.systemUTC());
     }
 
     public static Plant createRosePlant(String name, Clock clock) {
-        return new RosePlant(name, clock);
+
+        Plant plant= new RosePlant(name, clock);
+        injectStates(plant);
+        return plant;
     }
 
 
@@ -20,7 +31,11 @@ public class PlantFactory {
     }
 
     public static Plant createAppleTree(String name, Clock clock) {
-        return new AppleTree(name, clock);
+
+        Plant plant= new AppleTree(name, clock);
+        injectStates(plant);
+        return plant;
+
     }
 
     public static Plant createMangoTree(String name) {
@@ -29,6 +44,8 @@ public class PlantFactory {
 
 
     public static Plant createMangoTree(String name, Clock clock) {
-        return new MangoTree(name, clock);
+        Plant plant= new MangoTree(name, clock);
+        injectStates(plant);
+        return plant;
     }
 }

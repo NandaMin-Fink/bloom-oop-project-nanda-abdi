@@ -1,9 +1,7 @@
 package bloom.plant;
 
-public enum PlantState {
-    SEEDLING,
-    GROWING,
-    MATURE,
-//    WITHERING,
-    DEAD
+public interface PlantState {
+    void handleGrow(Plant plant);
+    void handleWither(Plant plant);
+    String getStageName();
 }
